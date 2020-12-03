@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">COSC_Programming_Assignment_6</string>
+    <string name="battlebots">BATTLEBOTS</string>
+    <string name="set_up_your_battlebot">Set-up your BattleBot</string>
+    <string name="points_to_assign">Points to Assign:</string>
+    <string name="pntsremain">PntsRemain</string>
+    <string name="ready_up">Ready Up!</string>
+    <string name="bot_name">Bot Name:</string>
+    <string name="armor">Armor:</string>
+    <string name="shot_power">Shot Power:</string>
+    <string name="scan_range">Scan Range:</string>
+    <string name="title_activity_controller">ControllerActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
