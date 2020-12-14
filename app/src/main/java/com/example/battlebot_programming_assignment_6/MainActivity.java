@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.example.battlebot_programming_assignment_6.views.CustomJoystickView;
 
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -100,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements HostInfoDialog.Ho
                     //need to put localIP
                     socket.MakeClientCon(hostNameActual,portNumberActual);
                     socket.writeLine(serverStats);
-                    socket.writeLine(socket.getLine());
                 });
                 openControllerActivtiy();
             }

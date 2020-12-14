@@ -26,6 +26,7 @@ public class MySocket  {
     public static BufferedReader in = null;
     public BufferedReader stdIn;
 
+
     public void MakeClientCon(String host, int port){
         //     Making a connection to server, which is running on host at port
         try {
@@ -34,8 +35,7 @@ public class MySocket  {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             System.out.println("Successfully made connection");
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: "+ host);
-            //System.exit(1);
+            System.err.println("Unknown Host: "+ host);
         } catch (IOException e) {
             System.err.println("Couldn't get I/O for "
                     + "the connection to: " + host);
@@ -43,11 +43,7 @@ public class MySocket  {
         }
     }
 
-    /* getLine
-      @param  returns a Strings
-      getLine reads the socket (blocking read) and returns the a line of text as
-      the return value.  If the socket fails to read, "AWGH!!!" is returned
-    */
+
     public String getLine() {
         // read from network port and have default value
         String from;
@@ -55,17 +51,13 @@ public class MySocket  {
         try {
             from = in.readLine();
         } catch (IOException e) {
-            from = "AWGH!!!";
+            from = "Could not get I/O";
         }
         System.out.println("Read Done");
         System.out.println("Message: "+from);
         return (from);
     }
 
-    /*  writeLine
-       @param   to  a string that to send via the socket
-      Takes the variable to and sends to the receiving side of the socket
-    */
     public void writeLine(String to) {
         System.out.println("Writing: "+to);
         //out.println(to);

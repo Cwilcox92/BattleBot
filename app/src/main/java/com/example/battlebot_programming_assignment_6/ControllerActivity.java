@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.example.battlebot_programming_assignment_6.views.CustomJoystickView;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -44,8 +46,13 @@ public class ControllerActivity extends AppCompatActivity {
         MySocket socket = new MySocket();
         ExecutorService service= Executors.newFixedThreadPool(1);
         service.execute(()->{
-            //socket.writeLine("noop");
-            socket.writeLine(socket.getLine());
+            new Timer().scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    socket.getLine();
+                    socket.writeLine("noop");
+                }
+            }, 0, 600);//put here time 1000 milliseconds=1 second
         });
         shootBttn= findViewById(R.id.shootBttn);
         shootBttn.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +62,7 @@ public class ControllerActivity extends AppCompatActivity {
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
                     socket.writeLine(fireGun);
-                    socket.writeLine(socket.getLine());
+
                 });
             }
         });
@@ -67,7 +74,6 @@ public class ControllerActivity extends AppCompatActivity {
                 service.execute(()->{
                     String s= "scan ";
                     socket.writeLine(s);
-                    socket.writeLine(socket.getLine());
 
                 });
             }
@@ -76,11 +82,13 @@ public class ControllerActivity extends AppCompatActivity {
         upButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shotAngle=0;
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
                     //String moveUp= "move 0 -1" ;
                     socket.writeLine("move 0 -1");
-                    socket.writeLine(socket.getLine());
+
+
                 });
             }
         });
@@ -88,11 +96,11 @@ public class ControllerActivity extends AppCompatActivity {
         dwnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shotAngle=180;
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
-                    String moveDown= "move " + 0 + " " + 1;
-                    socket.writeLine(moveDown);
-                    socket.writeLine(socket.getLine());
+                    socket.writeLine("move 0 1");
+
                 });
             }
         });
@@ -102,9 +110,9 @@ public class ControllerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
-                    String moveLeft= "move " + -1 + " " + 0;
-                    socket.writeLine(moveLeft);
-                    socket.writeLine(socket.getLine());
+                    shotAngle=270;
+                    socket.writeLine("move -1 0");
+
                 });
             }
         });
@@ -112,11 +120,11 @@ public class ControllerActivity extends AppCompatActivity {
         rightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shotAngle=90;
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
-                    String moveRight= "move " + 1 + " " + 0;
-                    socket.writeLine(moveRight);
-                    socket.writeLine(socket.getLine());
+                    socket.writeLine("move 1 0");
+
                 });
             }
         });
@@ -124,11 +132,11 @@ public class ControllerActivity extends AppCompatActivity {
         upRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shotAngle=45;
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
-                    String moveUpRight= "move " + -1 + " " + -1;
-                    socket.writeLine(moveUpRight);
-                    socket.writeLine(socket.getLine());
+                    socket.writeLine("move 1 -1");
+
                 });
             }
         });
@@ -136,11 +144,12 @@ public class ControllerActivity extends AppCompatActivity {
         upLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shotAngle= 325;
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
-                    String moveUpLeft= "move " + 1 + " " + -1;
-                    socket.writeLine(moveUpLeft);
-                    socket.writeLine(socket.getLine());
+
+                    socket.writeLine("move -1 -1");
+
                 });
             }
         });
@@ -148,10 +157,11 @@ public class ControllerActivity extends AppCompatActivity {
         downRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shotAngle=145;
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
-                    String moveDownRight= "move " + 1 + " " + 1;
-                    socket.writeLine(socket.getLine());
+                    socket.writeLine("move 1 1");
+
                 });
             }
         });
@@ -159,11 +169,11 @@ public class ControllerActivity extends AppCompatActivity {
         downLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shotAngle= 225;
                 ExecutorService service= Executors.newFixedThreadPool(1);
                 service.execute(()->{
-                    String moveDownLeft= "move " + -1 + " " + 1;
-                    socket.writeLine(moveDownLeft);
-                    socket.writeLine(socket.getLine());
+                    socket.writeLine("move -1 1");
+
                 });
             }
         });
